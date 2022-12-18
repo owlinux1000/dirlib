@@ -17,9 +17,9 @@ def user_config_dir(platform:str = sys.platform):
             dir = os.getenv("HOME")
             if dir is None:
                 raise '$HOME is not defined'
-            path = Path(dir)
-            path.joinpath("/Libary/Application Support")
-            return str(path)
+            dir = Path(dir)
+            dir.joinpath("/Libary/Application Support")
+            return str(dir)
 
         case "linux":
             dir = os.getenv("XDG_CONFIG_HOME")
@@ -27,9 +27,9 @@ def user_config_dir(platform:str = sys.platform):
                 dir = os.getenv("HOME")
                 if dir is None:
                     raise 'neither $XDG_CONFIG_HOME nor $HOME are defined'
-            path = Path(dir)
-            path.joinpath("./config")
-            return str(path)
+                dir = Path(dir)
+                dir.joinpath("./config")
+            return str(dir)
 
         case _:
             raise "Your platform is not supproted. Currently, dirlib supports Windows, Unix and macOS"
