@@ -10,7 +10,15 @@ pip install dirlib
 
 ## How to use
 
-```
+```python
 import dirlib
-print(dirlib.user_config_dir())
+
+# On Windows
+print(dirlib.user_config_dir()) #=> %AppData% or %UserProfile%
+
+# On Unix
+print(dirlib.user_config_dir()) #=> $XDG_CONFIG_HOME or $HOME/.config
+
+# On macOS
+print(dirlib.user_config_dir()) #=> $HOME/Libary/Application Support
 ```
