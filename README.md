@@ -22,3 +22,11 @@ print(dirlib.user_config_dir()) #=> $XDG_CONFIG_HOME or $HOME/.config
 # On macOS
 print(dirlib.user_config_dir()) #=> $HOME/Libary/Application Support
 ```
+
+`user_config_dir()` can pass the two arguments. The first one is an application name. Here is an example on Windows.
+
+```python
+import dirlib
+app_name = "mysupercooltool"
+print(dirlib.user_config_dir(app_name)) #=> C:\Users\chihiro\AppData\Roaming\mysupercooltool
+```

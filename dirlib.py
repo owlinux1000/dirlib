@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 
-def user_config_dir(platform: str = sys.platform):
+def user_config_dir(app: str = "", platform: str = sys.platform):
     dir = ""
     match platform:
         case "win32":
@@ -12,6 +12,8 @@ def user_config_dir(platform: str = sys.platform):
                 dir = os.getenv("UserProfile")
                 if dir is None:
                     raise "neither %AppData% nor %UserProfile% are defined"
+            if app != "":
+                dir = Path(dir).joinpath(app)
             return dir
 
         case "darwin":
@@ -20,6 +22,8 @@ def user_config_dir(platform: str = sys.platform):
                 raise "$HOME is not defined"
             dir = Path(dir)
             dir = dir.joinpath("/Libary/Application Support")
+            if app != "":
+                dir = dir.joinpath(app)
             return str(dir)
 
         case "linux":
@@ -30,6 +34,8 @@ def user_config_dir(platform: str = sys.platform):
                     raise "neither $XDG_CONFIG_HOME nor $HOME are defined"
                 dir = Path(dir)
                 dir = dir.joinpath(".config")
+                if app != "":
+                    dir = dir.joinpath(app)
             return str(dir)
 
         case _:
